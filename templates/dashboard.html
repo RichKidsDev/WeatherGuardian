@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wetter Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Willkommen, {{ session['username'] }}!</h1>
+        <a href="{{ url_for('logout') }}" class="btn btn-danger">Abmelden</a>
+        
+        {% if weather %}
+            <h2 class="mt-4">Aktuelle Wetterdaten für {{ weather['name'] }}</h2>
+            <p>Zustand: {{ weather['weather'][0]['description'] }}</p>
+            <p>Temperatur: {{ weather['main']['temp'] }} °C</p>
+            <p>Feuchtigkeit: {{ weather['main']['humidity'] }}%</p>
+            <p>Windgeschwindigkeit: {{ weather['wind']['speed'] }} m/s</p>
+        {% else %}
+            <p>Keine Wetterdaten verfügbar.</p>
+        {% endif %}
+        
+        <!-- Knopf für den Testalarm -->
+        <a href="{{ url_for('send_test_alert') }}" class="btn btn-warning mt-4">Testalarm senden</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
